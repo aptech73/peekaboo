@@ -791,10 +791,12 @@ class PhotoCaptureDelegate(
 
 private fun UIImage.toPeekabooCameraImage(): PeekabooCameraImage? {
     return UIImagePNGRepresentation(this)?.let { imageData ->
+        val (width, height) = this.size.useContents { width to height }
+        
         PeekabooCameraImage(
             image = imageData.toByteArray(),
-            height = ,
-            width =
+            height = height.roundToInt(),
+            width = width.roundToInt()
         )
     }
 }
